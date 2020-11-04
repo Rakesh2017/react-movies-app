@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class SearchPrompt extends Component {
     render() {
         return (
-            <div>
-                <h2>please enter a search</h2>
+            <div style={{textAlign: 'center'}}>
+                <h2>Please enter a search</h2>
             </div>
         );
     }

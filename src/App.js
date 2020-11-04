@@ -10,12 +10,11 @@ function App() {
 }
 
 const style = {
-  maxWidth: "1200px", 
+  maxWidth: "1200px",
+  minWidth: '800px', 
   margin: 'auto',
-  border: 'solid 1px grey',
-  borderRadius: '5px',
   padding: '20px',
-  marginTop: '20px',
+  marginTop: '0',
 }
 
 export default App;
