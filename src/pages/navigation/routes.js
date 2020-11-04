@@ -12,7 +12,8 @@ export default class routes extends Component {
         this.state = ({
             // by default movie tab
             index: 0,
-            query: this.props.query
+            query: this.props.query,
+             filter: "movie"
         })
         this.moon = React.createRef();
     }
@@ -20,18 +21,11 @@ export default class routes extends Component {
     setIndex = () => {
         this.setState({
             index: this.props.index,
-        })
-        this.setState({
-            query: this.props.query
+            query: this.props.query,
+            filter: this.props.filter,
         })
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.query !== this.state.query) {
-            // this.moon.current.changeName();
-            console.log(`me=> ${this.state.query}`)
-        }
-    }
 
     render() {
 
@@ -52,10 +46,9 @@ export default class routes extends Component {
                     </TabPanel>
                     {/* search */}
                     <TabPanel>
-                        {console.log(`routesQuery => ${this.state.query}`)}
                         <Search
-                            query={this.state.query}
-                            ref={this.moon}
+                            query={this.props.query}
+                            filter={this.props.filter}
                         />
                     </TabPanel>
                     {/* TV */}

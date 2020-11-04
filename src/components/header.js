@@ -6,8 +6,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {variables} from '../utils/variables'
-
 
 export default class Header extends Component {
 
@@ -18,7 +16,6 @@ export default class Header extends Component {
             // by default showing {now_playing}
             value: 'movie',
             filter: "movie",
-            query: variables.intial_query,
             // though index can be handled at parent{home}, but this can be handy if tabs positions chnaged in future
             index: 1
         }
@@ -30,7 +27,7 @@ export default class Header extends Component {
                 {/* title */}
                 <h1 className="header-title">React Movies App</h1>
                 {/* search input */}
-                <TextField id="outlined-search" label="Search field" type="search" variant="outlined" />
+                <TextField id="outlined-search" placeholder="search movie, tv shows" label="Search" type="search" variant="outlined" />
 
                 <div className='categories_con'>
                     {/* select/ drop down */}
@@ -48,8 +45,8 @@ export default class Header extends Component {
                             }}
                         >
                             <MenuItem value={"movie"}>movie</MenuItem>
-                            <MenuItem value={"popular"}>TV</MenuItem>
-                            <MenuItem value={"top_rated"}>multi</MenuItem>
+                            <MenuItem value={"tv"}>TV</MenuItem>
+                            <MenuItem value={"multi"}>multi</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
@@ -59,7 +56,7 @@ export default class Header extends Component {
                     variant="contained"
                     color="primary"
                     onClick={event => {
-                        this.props.onFilterChanged(this.state.filter)
+                        this.props.onFilterChanged(this.state.filter, )
                         this.props.onQueryChanged(document.getElementById('outlined-search').value)
                         this.props.onIndexChanged(this.state.index)
                     }}
