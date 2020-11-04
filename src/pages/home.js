@@ -37,12 +37,6 @@ export default class Home extends Component {
     componentDidUpdate(prevProps, prevState){
         // change index all the throughh to search
         this.cat.current.setIndex();
-        if(prevState.filter !== this.state.filter) {
-            console.log(`parentFilterValue: ${this.state.filter}`)
-        }
-        if(prevState.query !== this.state.query) {
-            console.log(`headerQueryValue: ${this.state.query}`)
-        }
     }
 
 

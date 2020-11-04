@@ -25,49 +25,59 @@ export default class Header extends Component {
         return (
             <div className='header-con'>
                 {/* title */}
-                <h1 className="header-title">React Movies App</h1>
+                <h1 style={{display:'flex', justifyContent: 'center'}} className="header-title">React Movie App</h1>
                 {/* search input */}
-                <TextField id="outlined-search" placeholder="search movie, tv shows" label="Search" type="search" variant="outlined" />
 
-                <div className='categories_con'>
-                    {/* select/ drop down */}
-                    <FormControl variant="filled" className={useStyles.formControl}>
-                        <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-filled-label"
-                            id="demo-simple-select-filled"
-                            value={this.state.value}
-                            onChange={(event) => {
-                                this.setState({
-                                    value: event.target.value,
-                                    filter: event.target.value,
-                                })
+                <div style={{display:'flex', justifyContent: 'center'}}>
+                    <div style={mainContainerStyle}>
+
+                        <TextField id="outlined-search" placeholder="search movie, tv shows" label="Search" type="search" variant="outlined" />
+                        {/* categories */}
+                        <div className='categories_con' style={{ display: 'flex', justifyContent: 'center' }}>
+                            {/* select/ drop down */}
+                            <FormControl variant="filled" className={useStyles.formControl}>
+                                <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-filled-label"
+                                    id="demo-simple-select-filled"
+                                    value={this.state.value}
+                                    onChange={(event) => {
+                                        this.setState({
+                                            value: event.target.value,
+                                            filter: event.target.value,
+                                        })
+                                    }}
+                                >
+                                    <MenuItem value={"movie"}>Movies</MenuItem>
+                                    <MenuItem value={"tv"}>TV Shows</MenuItem>
+                                    <MenuItem value={"multi"}>Multi</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
+                        {/* button */}
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={event => {
+                                this.props.onFilterChanged(this.state.filter,)
+                                this.props.onQueryChanged(document.getElementById('outlined-search').value)
+                                this.props.onIndexChanged(this.state.index)
                             }}
                         >
-                            <MenuItem value={"movie"}>movie</MenuItem>
-                            <MenuItem value={"tv"}>TV</MenuItem>
-                            <MenuItem value={"multi"}>multi</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-
-                {/* button */}
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={event => {
-                        this.props.onFilterChanged(this.state.filter, )
-                        this.props.onQueryChanged(document.getElementById('outlined-search').value)
-                        this.props.onIndexChanged(this.state.index)
-                    }}
-                >
-                    Search
+                            Search
                 </Button>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
+const mainContainerStyle = {
+    display: 'grid',
+    gridTemplateColumns: '2fr 1fr 1fr',
+    // maxWidth: '1000px'
+}
 
 const useStyles = makeStyles((theme) => ({
     formControl: {

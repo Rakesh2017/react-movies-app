@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import CardTemplate from '../../utils/card_template';
-import { variables } from '../../utils/variables';
-
+import CardTemplate from './card-template'
+import { variables } from '../utils/variables';
+import EmptyPrompt from './empty-prompt'
 
 export default class Search extends Component {
 
     constructor(props) {
         super(props);
-        // to reduce redundancy and increase reusabilty, every filter will be generated from same set of code with help of state
         this.state = {
             // by default showing {now_playing}
             filter: this.props.filter,
@@ -18,32 +17,44 @@ export default class Search extends Component {
             release_date: [],
             popularity: [],
             description: [],
-            value: this.props.value
+            value: this.props.value,
+            bool: false,
         }
     }
 
-    componentDidUpdate(d, b){
-        if(this.props.query !== this.state.query){
+    componentDidUpdate(d, b) {
+        if (this.props.query !== this.state.query) {
             this.setState({
-                query: this.props.query
+                query: this.props.query,
             })
             this.componentDidMount();
-            console.log(`valeues=> ${this.props.query}, ${this.state.query}`)
         }
-        
-        
+        if (this.props.filter !== this.state.filter) {
+            this.setState({
+                filter: this.props.filter,
+            })
+            this.componentDidMount();
+        }
     }
 
     componentDidMount() {
-        console.log(`searchQuery => ${this.state.query}`)
+       
         let url = `${variables.base_url}/search/${this.props.filter}/?query=${this.props.query}&api_key=${variables.api}&language=en-US&page=1`
-        console.log("Search -> componentDidMount -> url", url)
+       
 
         fetch(url).then(response => {
             return response.json()
-        }).then(result => {
+        }).then(async result => {
             let json = result.results;
 
+            if (await result.results == "")
+                this.setState({
+                    bool: true
+                });
+            else
+                this.setState({
+                    bool: false
+                })
 
             let id = [], poster = [], title = [], release_date = [], popularity = [], description = []
             for (let i = 0; i < json.length; i++) {
@@ -64,7 +75,7 @@ export default class Search extends Component {
                 description: description
             })
         }).catch(err => {
-            //console.log(err)
+            // console.log(err)
         })
     }
 
@@ -74,20 +85,23 @@ export default class Search extends Component {
             <div>
                 {/* list of movies */}
                 <div id="movies-dynamic-entries">
-                    <ul id="movies-ul">
-                        {this.state.id.map((element, index) => {
-                            return <CardTemplate
-                                filter={this.state.filter}
-                                title={this.state.title[index]}
-                                poster={this.state.poster[index]}
-                                release_date={this.state.release_date[index]}
-                                popularity={this.state.popularity[index]}
-                                description={this.state.description[index]}
-                            />
-                        })}
-                    </ul>
+                   
+                    {  this.state.bool ? <EmptyPrompt /> :
+                        <ul id="movies-ul">
+                            {this.state.id.map((element, index) => {
+                                return <CardTemplate
+                                    filter={this.state.filter}
+                                    title={this.state.title[index]}
+                                    poster={this.state.poster[index]}
+                                    release_date={this.state.release_date[index]}
+                                    popularity={this.state.popularity[index]}
+                                    description={this.state.description[index]}
+                                />
+                            })
+                            }
+                        </ul>
+                    }
                 </div>
-
             </div>
         )
     }
