@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
-import CardTemplate from '../../utils/card_template'
+import CardTemplate from './card-template'
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import { variables } from '../../utils/variables';
+import { variables } from '../utils/variables'
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 
-export default class Telivision extends Component {
+export default class Movies extends Component {
 
     constructor(props) {
         super(props);
         // to reduce redundancy and increase reusabilty, every filter will be generated from same set of code with help of state
         this.state = {
-            // by default showing {airing_today}
-            filter: "airing_today",
+            // by default showing {now_playing}
+            filter: "now_playing",
             id: [],
             poster: [],
             title: [],
             release_date: [],
             popularity: [],
             description: [],
-            value: 'airing_today'
+            value: 'now_playing'
         }
     }
 
@@ -32,7 +32,8 @@ export default class Telivision extends Component {
     }
 
     componentDidMount() {
-        let url = `${variables.base_url}/tv/${this.state.filter}/?api_key=${variables.api}&language=en-US&page=1`
+        let url = `${variables.base_url}/movie/${this.state.filter}/?api_key=${variables.api}&language=en-US&page=1`
+
         fetch(url).then(response => {
             return response.json()
         }).then(result => {
@@ -74,7 +75,7 @@ export default class Telivision extends Component {
                             labelId="demo-simple-select-filled-label"
                             id="demo-simple-select-filled"
                             value={this.state.value}
-                            onChange={(event)=> {       
+                            onChange={(event)=> {
                                 this.setState({
                                     value: event.target.value,
                                     filter: event.target.value,
@@ -82,10 +83,10 @@ export default class Telivision extends Component {
                                 })
                             }}
                         >
-                            <MenuItem value={"airing_today"}>airing today</MenuItem>
-                            <MenuItem value={"on_the_air"}>on the air</MenuItem>
+                            <MenuItem value={"now_playing"}>now playing</MenuItem>
                             <MenuItem value={"popular"}>popular</MenuItem>
                             <MenuItem value={"top_rated"}>top rated</MenuItem>
+                            <MenuItem value={"upcoming"}>upcoming</MenuItem>
                         </Select>
                     </FormControl>
                 </div>

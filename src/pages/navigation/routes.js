@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import Movies from './movies'
-import Search from './search'
-import Telivision from './telivision'
+import Movies from '../../components/movies'
+import Search from '../../components/search'
+import Telivision from '../../components/telivision'
+import SearchPrompt from '../../components/search-prompt'
 
 export default class routes extends Component {
 
@@ -13,7 +14,7 @@ export default class routes extends Component {
             // by default movie tab
             index: 0,
             query: this.props.query,
-             filter: "movie"
+            filter: "movie"
         })
         this.moon = React.createRef();
     }
@@ -30,10 +31,10 @@ export default class routes extends Component {
     render() {
 
         return (
-            <div className='routes-con'>
-                <Tabs selectedIndex={this.state.index} onSelect={index => this.setState({ index: index })}>
+            <div className='routes-con' style={{marginTop: '10px'}}>
+                <Tabs style={{border: 'solid 1px grey', padding: '10px', borderRadius:'5px'}} selectedIndex={this.state.index} onSelect={index => this.setState({ index: index })}>
                     {/* titles */}
-                    <TabList>
+                    <TabList  >
                         <Tab>Movies</Tab>
                         <Tab>Search Results</Tab>
                         <Tab>TV Shows</Tab>
@@ -41,22 +42,29 @@ export default class routes extends Component {
                     {/* components */}
 
                     {/* movies */}
-                    <TabPanel>
+                    <TabPanel style={mainContainerStyle}>
                         <Movies />
                     </TabPanel>
                     {/* search */}
-                    <TabPanel>
-                        <Search
-                            query={this.props.query}
-                            filter={this.props.filter}
-                        />
+                    <TabPanel style={mainContainerStyle}>
+                        {this.props.query === "$" || this.props.query === "" ? <SearchPrompt /> :
+                            <Search
+                                query={this.state.query}
+                                filter={this.state.filter}
+                            />}
                     </TabPanel>
                     {/* TV */}
-                    <TabPanel>
+                    <TabPanel style={mainContainerStyle}>
                         <Telivision />
                     </TabPanel>
                 </Tabs>
             </div>
         )
     }
+}
+
+const mainContainerStyle = {
+    paddingTop: '50px',
+    overflowY: 'scroll',
+    height: '1500px'
 }

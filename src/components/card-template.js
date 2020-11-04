@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { variables } from './variables'
+import { variables } from '../utils/variables'
 let base_url = variables.image_url;
 
 class CardTemplate extends Component {
