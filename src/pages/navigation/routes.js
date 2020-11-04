@@ -31,22 +31,22 @@ export default class routes extends Component {
     render() {
 
         return (
-            <div className='routes-con' style={{marginTop: '10px'}}>
-                <Tabs style={{border: 'solid 1px grey', padding: '10px', borderRadius:'5px'}} selectedIndex={this.state.index} onSelect={index => this.setState({ index: index })}>
+            <div className='routes-con' style={{ marginTop: '40px' }}>
+                <Tabs style={{ border: 'solid 1px grey', borderRadius: '5px' }} selectedIndex={this.state.index} onSelect={index => this.setState({ index: index })}>
                     {/* titles */}
-                    <TabList  >
-                        <Tab>Movies</Tab>
-                        <Tab>Search Results</Tab>
-                        <Tab>TV Shows</Tab>
+                    <TabList style={styles.tabList} >
+                        <Tab style={{display: 'flex', justifyContent: 'stretch'}}>MOVIES</Tab>
+                        <Tab>SEARCH RESULTS</Tab>
+                        <Tab>TV SHOWS</Tab>
                     </TabList>
                     {/* components */}
 
                     {/* movies */}
-                    <TabPanel style={mainContainerStyle}>
+                    <TabPanel style={styles.mainContainerStyle}>
                         <Movies />
                     </TabPanel>
                     {/* search */}
-                    <TabPanel style={mainContainerStyle}>
+                    <TabPanel style={styles.mainContainerStyle}>
                         {this.props.query === "$" || this.props.query === "" ? <SearchPrompt /> :
                             <Search
                                 query={this.state.query}
@@ -54,7 +54,7 @@ export default class routes extends Component {
                             />}
                     </TabPanel>
                     {/* TV */}
-                    <TabPanel style={mainContainerStyle}>
+                    <TabPanel style={styles.mainContainerStyle}>
                         <Telivision />
                     </TabPanel>
                 </Tabs>
@@ -63,8 +63,15 @@ export default class routes extends Component {
     }
 }
 
-const mainContainerStyle = {
-    paddingTop: '50px',
-    overflowY: 'scroll',
-    height: '1500px'
+const styles = {
+    mainContainerStyle: {
+        paddingTop: '20px',
+        overflowY: 'scroll',
+        height: '1500px'
+    },
+    tabList: {
+        background: 'rgba(192, 192, 192, 0.23)',
+        display: 'flex',
+        justifyContent: 'space-around'
+    },
 }

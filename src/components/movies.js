@@ -67,7 +67,7 @@ export default class Movies extends Component {
         return (
             <div>
                 {/* movie category select option */}
-                <div className='categories_con'>
+                <div className='categories_con' style={styles.category}>
                     {/* select/ drop down */}
                     <FormControl variant="filled" className={useStyles.formControl}>
                         <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
@@ -93,7 +93,7 @@ export default class Movies extends Component {
 
                 {/* list of movies */}
 
-                <div id="movies-dynamic-entries">
+                <div id="movies-dynamic-entries" style={styles.movies}>
                     <ul id="movies-ul">
                         {this.state.id.map((element, index) => {
                             return <CardTemplate
@@ -113,6 +113,16 @@ export default class Movies extends Component {
     }
 }
 
+const styles = {
+    category: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    movies: {
+        display: 'flex',
+        justifyContent: 'center'
+    }
+}
 
 const useStyles = makeStyles((theme) => ({
     formControl: {

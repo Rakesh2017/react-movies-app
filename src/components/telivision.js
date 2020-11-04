@@ -43,7 +43,7 @@ export default class Telivision extends Component {
             for (let i = 0; i < json.length; i++) {
                 id.push(json[i].id)
                 poster.push(json[i].poster_path);
-                title.push(json[i].original_title);
+                title.push(json[i].name);
                 release_date.push(json[i].release_date);
                 popularity.push(json[i].popularity);
                 description.push(json[i].overview);
@@ -66,7 +66,7 @@ export default class Telivision extends Component {
         return (
             <div>
                 {/* movie category select option */}
-                <div className='categories_con'>
+                <div style={styles.category} className='categories_con'>
                     {/* select/ drop down */}
                     <FormControl variant="filled" className={useStyles.formControl}>
                         <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
@@ -92,9 +92,10 @@ export default class Telivision extends Component {
 
                 {/* list of movies */}
 
-                <div id="movies-dynamic-entries">
+                <div style={styles.movies} id="movies-dynamic-entries">
                     <ul id="movies-ul">
                         {this.state.id.map((element, index) => {
+                            
                             return <CardTemplate
                                 filter = {this.state.filter}
                                 title={this.state.title[index]}
@@ -109,6 +110,17 @@ export default class Telivision extends Component {
 
             </div>
         )
+    }
+}
+
+const styles = {
+    category: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    movies: {
+        display: 'flex',
+        justifyContent: 'center'
     }
 }
 

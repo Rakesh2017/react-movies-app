@@ -38,9 +38,9 @@ export default class Search extends Component {
     }
 
     componentDidMount() {
-       
+
         let url = `${variables.base_url}/search/${this.props.filter}/?query=${this.props.query}&api_key=${variables.api}&language=en-US&page=1`
-       
+
 
         fetch(url).then(response => {
             return response.json()
@@ -60,7 +60,8 @@ export default class Search extends Component {
             for (let i = 0; i < json.length; i++) {
                 id.push(json[i].id)
                 poster.push(json[i].poster_path);
-                title.push(json[i].original_title);
+                if (json[i].original_title === undefined) title.push(json[i].original_name); 
+                else title.push(json[i].original_title);
                 release_date.push(json[i].release_date);
                 popularity.push(json[i].popularity);
                 description.push(json[i].overview);
@@ -84,9 +85,9 @@ export default class Search extends Component {
         return (
             <div>
                 {/* list of movies */}
-                <div id="movies-dynamic-entries">
-                   
-                    {  this.state.bool ? <EmptyPrompt /> :
+                <div style={styles.category} id="movies-dynamic-entries">
+
+                    {this.state.bool ? <EmptyPrompt /> :
                         <ul id="movies-ul">
                             {this.state.id.map((element, index) => {
                                 return <CardTemplate
@@ -107,3 +108,10 @@ export default class Search extends Component {
     }
 }
 
+
+const styles = {
+    category: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+}

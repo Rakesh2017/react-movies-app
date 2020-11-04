@@ -25,11 +25,11 @@ export default class Header extends Component {
         return (
             <div className='header-con'>
                 {/* title */}
-                <h1 style={{display:'flex', justifyContent: 'center'}} className="header-title">React Movie App</h1>
+                <h1 style={{display:'flex', justifyContent: 'center', marginTop: '0'}} className="header-title">React Movie App</h1>
                 {/* search input */}
 
                 <div style={{display:'flex', justifyContent: 'center'}}>
-                    <div style={mainContainerStyle}>
+                    <div style={styles.mainContainerStyle}>
 
                         <TextField id="outlined-search" placeholder="search movie, tv shows" label="Search" type="search" variant="outlined" />
                         {/* categories */}
@@ -73,10 +73,12 @@ export default class Header extends Component {
     }
 }
 
-const mainContainerStyle = {
-    display: 'grid',
-    gridTemplateColumns: '2fr 1fr 1fr',
-    // maxWidth: '1000px'
+const styles = {
+    mainContainerStyle : {
+        display: 'grid',
+        gridTemplateColumns: '2fr 1fr 1fr',
+        // maxWidth: '1000px'
+    }
 }
 
 const useStyles = makeStyles((theme) => ({
