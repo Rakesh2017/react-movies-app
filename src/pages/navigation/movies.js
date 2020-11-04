@@ -25,9 +25,14 @@ export default class Movies extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if (prevState.filter !== this.state.filter){
+            this.componentDidMount();
+        }
+    }
+
     componentDidMount() {
         let url = `${variables.base_url}/movie/${this.state.filter}/?api_key=${variables.api}&language=en-US&page=1`
-        console.log("Movies -> componentDidMount -> url", url)
 
         fetch(url).then(response => {
             return response.json()
@@ -71,22 +76,17 @@ export default class Movies extends Component {
                             id="demo-simple-select-filled"
                             value={this.state.value}
                             onChange={(event)=> {
-                                
                                 this.setState({
                                     value: event.target.value,
                                     filter: event.target.value,
                                     id: this.state.id
                                 })
-                                
-                                console.log(event.target.value)
                             }}
                         >
-                            {/* <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem> */}
-                            <MenuItem value={"now_playing"}>now_playing</MenuItem>
+                            <MenuItem value={"now_playing"}>now playing</MenuItem>
                             <MenuItem value={"popular"}>popular</MenuItem>
-                            <MenuItem value={"top_rated"}>top_rated</MenuItem>
+                            <MenuItem value={"top_rated"}>top rated</MenuItem>
+                            <MenuItem value={"upcoming"}>upcoming</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
