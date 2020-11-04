@@ -22,9 +22,21 @@ export default class Search extends Component {
         }
     }
 
+    componentDidUpdate(d, b){
+        if(this.props.query !== this.state.query){
+            this.setState({
+                query: this.props.query
+            })
+            this.componentDidMount();
+            console.log(`valeues=> ${this.props.query}, ${this.state.query}`)
+        }
+        
+        
+    }
+
     componentDidMount() {
         console.log(`searchQuery => ${this.state.query}`)
-        let url = `${variables.base_url}/search/movie/?query=${this.props.query}&api_key=${variables.api}&language=en-US&page=1`
+        let url = `${variables.base_url}/search/${this.props.filter}/?query=${this.props.query}&api_key=${variables.api}&language=en-US&page=1`
         console.log("Search -> componentDidMount -> url", url)
 
         fetch(url).then(response => {

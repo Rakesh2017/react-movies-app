@@ -45,9 +45,6 @@ export default class Home extends Component {
         }
     }
 
-    componentDidMount(){
-        console.log(`parentQueryValue: ${this.state.query}`)
-    }
 
     render() {
         return (
@@ -61,6 +58,7 @@ export default class Home extends Component {
                 {/* navigation tabs */}
                 <Routes
                     query={this.state.query}
+                    filter={this.state.filter}
                     index={this.state.index}
                     ref={this.cat}
                 />
