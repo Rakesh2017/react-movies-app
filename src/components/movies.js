@@ -33,13 +33,17 @@ export default class Movies extends Component {
 
     componentDidMount() {
         let url = `${variables.base_url}/movie/${this.state.filter}/?api_key=${variables.api}&language=en-US&page=1`
-        const headers = { 'Content-Type': 'application/json', 'type': 'GET', 'Access-Control-Allow-Origin': '*' }
-        fetch(url, headers).then(response => {
+        let options = {
+            method: "GET" ,
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            }
+        } ;
+        fetch(url, options).then(response => {
             return response.json()
         }).then(result => {
             let json = result.results;
-
-
             let id = [], poster = [], title = [], release_date = [], popularity = [], description = []
             for (let i = 0; i < json.length; i++) {
                 id.push(json[i].id)
