@@ -1,3 +1,3 @@
 # ReactJS Movies Web-App
 
-Langara Assignmant
+API: https://www.themoviedb.org/
