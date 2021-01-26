@@ -1,4 +1,4 @@
-# ReactJS Movies Web-App
+# ReactJS Movies Web-App | themoviedb apis
 
 API: https://www.themoviedb.org/
 
